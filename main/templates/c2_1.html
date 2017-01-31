@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div class="medium-10 medium-centered large-12 large-centered columns">
+          <form>
+            <div class="row column log-in-form">
+              <h4 class="text-left">주문정보 처리</h4>
+              <br/>
+              <h6><strong>마지막 생산예정 주문 정보</strong></h6>
+              <table class="hover" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th width="150">주문번호</th>
+                    <th>주문제품</th>
+                    <th width="100">제품수량</th>
+                    <th width="100">제품처리</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>치킨 피자 햄버거</td>
+                    <td>30</td>
+                    <td>123</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br/>
+              <h6><strong>현재 처리중인 주문 정보</strong></h6>
+              <table class="hover" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th width="150">주문번호</th>
+                    <th>주문제품</th>
+                    <th width="100">제품수량</th>
+                    <th width="100">제품처리</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td><span style="color: red">치킨 햄자 피버거</span></td>
+                    <td>30</td>
+                    <td>123</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br/>
+              <h6><strong>전체 생산 프로세스 표시 UI</strong></h6>
+              <div class="c2-image"></div>
+              <br/>
+              <p class="text-right"><a type="submit" class="button">이전</a>    <a type="submit" class="button">확인</a></p>
+            </div>
+
+          </form>
+
+        </div>
+{% endblock content %}

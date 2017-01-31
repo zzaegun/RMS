@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMSS</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+
+  </head>
+  <body>
+    <div class="top-bar">
+
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text">유연 생산 스케줄 관리 시스템 (RMSS)</li>
+          <li>
+          <!--
+            <a href="#">One</a>
+            <ul class="menu vertical">
+              <li><a href="#">One</a></li>
+              <li><a href="#">Two</a></li>
+              <li><a href="#">Three</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Two</a></li>
+          <li><a href="#">Three</a></li>
+          -->
+        </ul>
+      </div>
+      
+      <div class="top-bar-right">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text">로그아웃</li>
+        </ul>
+      </div>
+    
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="medium-10 medium-centered large-12 large-centered columns">
+          <form>
+            <div class="row column log-in-form">
+              <h4 class="text-left">설비 고장 정보 조회</h4>
+              <div class="table-scroll" style="height: 300px">
+              <table class="hover" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th width="150">고장 설비</th>
+                    <th width="100">할당량</th>
+                    <th width="250">고장 상태</th>
+                    <th>영향 스케쥴</th>
+                    <th width="100">주문대응</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>막대기</td>
+                    <td>3</td>
+                    <td>맛감</td>
+                    <td>없음</td>
+                    <td><a type="modify" class="button tiny" style="margin: 0">주문대응</a></td>
+                  </tr>
+                  <tr>
+                    <td>꼬챙이</td>
+                    <td>32</td>
+                    <td>부서짐</td>
+                    <td>없음</td>
+                    <td><a type="modify" class="button tiny" style="margin: 0">주문대응</a></td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+              <br/>
+              <h6><strong>설비 고장 등록</strong></h6>
+
+              
+              
+              <label>
+                설비 리스트 : 
+              <div class="input-group">
+                  <select style="margin: 0">
+                  <option value="husker">Husker</option>
+                  <option value="starbuck">Starbuck</option>
+                  <option value="hotdog">Hot Dog</option>
+                  <option value="apollo">Apollo</option>
+                </select>
+              </label>
+                <div class="input-group-button">
+                  <input type="submit" class="button" value="설비 고장 등록">
+                </div>
+              </div>
+
+              <p class="text-right"><a type="submit" class="button">확인</a></p>
+              
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

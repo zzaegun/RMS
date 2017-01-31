@@ -1,0 +1,51 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+* {font-family:'Nanum Gothic', sans-serif !important;}
+
+.container {
+	background-image: url('../bg.jpg');
+	height: 100%;
+    position: fixed;
+    width: 100%;
+}
+.log-in-form {
+  border: 2px solid #cacaca;
+  padding: 30px;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  border-radius: 3px; 
+  background-color: white;
+}
+.b1-image {
+	border: 2px solid #1779ba;
+	height:200px;
+}
+.c2-image {
+  border: 2px solid #1779ba;
+  height:200px;
+}
+.d1-image {
+  border: 2px solid #1779ba;
+  height:250px;
+}
+.d1-time {
+  border: 2px solid #cacaca;
+  height:50px;
+  margin-top: 10px;
+}
+.top-bar, .top-bar ul {
+	background-color: #1779ba !important;
+}
+
+.log{
+ 	top: 50%;
+ 	position: relative;
+}
+
+.container>.row{
+	top: 150px;
+    position: relative;
+}
+
+.menu-text{
+	color: white;
+}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="medium-10 medium-centered large-12 large-centered columns">
+  <form>
+    <div class="row column log-in-form">
+      <h4 class="text-left">주문정보 수정</h4>
+      <br/>
+      <h6><strong>기존 작성된 주문 정보</strong></h6>
+      <table class="hover" style="width: 100%">
+        <thead>
+          <tr>
+            <th width="150">주문번호</th>
+            <th>주문제품</th>
+            <th width="100">제품수량</th>
+            <th width="100">제품처리</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>치킨 피자 햄버거</td>
+            <td>30</td>
+            <td>123</td>
+          </tr>
+        </tbody>
+      </table>
+      <br/>
+      <h6><strong>수정 반영 사항</strong></h6>
+      <table class="hover" style="width: 100%">
+        <thead>
+          <tr>
+            <th width="150">주문번호</th>
+            <th>주문제품</th>
+            <th width="100">제품수량</th>
+            <th width="100">제품처리</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><span style="color: red">치킨 햄자 피버거</span></td>
+            <td>30</td>
+            <td>123</td>
+          </tr>
+        </tbody>
+      </table>
+      <br/>
+      <div class="">
+      <label>주문 제품 :
+        <select>
+          <option value="husker">Husker</option>
+          <option value="starbuck">Starbuck</option>
+          <option value="hotdog">Hot Dog</option>
+          <option value="apollo">Apollo</option>
+        </select>
+      </label>
+      </div>
+      <div class="">
+      <label>
+        주문 수량 : 
+        <div class="input-group">
+          
+          <input class="input-group-field" type="number">
+          <span class="input-group-label">EA</span>
+        </div>
+      </label>
+      </div>
+      <p class="text-right"><a type="submit" class="button">이전</a>    <a type="submit" class="button">확인</a></p>
+    </div>
+  </form>
+</div>
+{% endblock content %}
+
+
