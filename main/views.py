@@ -42,4 +42,4 @@ def admin1(request):
     return render(request, 'd1.html', {})
 
 def admin2(request):
-    return render(request, 'd2.html, {})
+    return render(request, 'd2.html', {})
