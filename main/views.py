@@ -34,3 +34,12 @@ def aPurMan1(request):
 
 def aPurMan2(request):
 	return render(request, 'c2_2.html', {})
+
+def aPurMan3(request):
+	return render(request, 'c2_3.html', {})
+
+def admin1(request):
+    return render(request, 'd1.html', {})
+
+def admin2(request):
+    return render(request, 'd2.html, {})

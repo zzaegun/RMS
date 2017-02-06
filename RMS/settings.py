@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'RMS',
         'USER': 'test',
         'PASSWORD': 'test',
-        'HOST': 'localhost',
+        'HOST': '141.223.239.122',
         'PORT': '3306'
     }
 }
