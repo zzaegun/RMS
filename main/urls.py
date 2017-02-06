@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^aPur/$', views.aPur, name='aPur'),
     url(r'^aPurMan1/$', views.aPurMan1, name='aPurMan1'),
     url(r'^aPurMan2/$', views.aPurMan2, name='aPurMan2'),
+    url(r'^cReq_newRequest/$', views.cReq_newRequest, name='cReq_newRequest'),
+    #url('/', include())
 ]

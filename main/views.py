@@ -1,5 +1,7 @@
 from django.shortcuts import render
-
+from .models import *
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 # Create your views here.
 def test(request): #login and test
 	return render(request, 'tpage.html', {})
@@ -8,7 +10,15 @@ def login(request): #login and test
 	return render(request, 'login.html', {})
 
 def cReq(request):
-	return render(request, 'b1.html', {})
+	items = T_PROD_TYPE.objects.all()
+	template = 'b1.html'
+	return render(request, template, {'items': items})
+
+def cReq_newRequest(request):
+	item = request.POST['item']
+	num = request.POST['num']
+	print(item, num)
+	return HttpResponseRedirect(reverse('main:cList'))
 
 def cList(request):
 	return render(request, 'b2.html', {})

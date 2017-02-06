@@ -2,18 +2,18 @@
 
 {% block content %}
 <div class="medium-10 medium-centered large-12 large-centered columns">
-  <form>
+  <form action="{% url 'main:cReq_newRequest' %}" method="post">
+  {% csrf_token %}
     <div class="row column log-in-form">
       <h4 class="text-left">고객 주문</h4>
       <div class="b1-image"></div>
       <br/>
       <div class="">
       <label>주문 제품 :
-        <select>
-          <option value="husker">Husker</option>
-          <option value="starbuck">Starbuck</option>
-          <option value="hotdog">Hot Dog</option>
-          <option value="apollo">Apollo</option>
+        <select name="item">
+          {% for item in items %}
+          <option value="{{item.ITEM_ID}}">{{item.ITEM_NAME}}</option>
+          {% endfor %}
         </select>
       </label>
       </div>
@@ -21,13 +21,13 @@
       <label>
         주문 수량 : 
         <div class="input-group">
-          
-          <input class="input-group-field" type="number">
+          <input name="num" class="input-group-field" type="number">
           <span class="input-group-label">EA</span>
         </div>
       </label>
       </div>
-      <p class="text-right"><a type="submit" class="button">기존주문조회</a>    <a type="submit" class="button">신규주문생성</a></p>
+      <p class="text-right"><a href="" class="button">기존주문조회</a>    
+      <input type="submit" class="button" value="신규주문생성"></p>
     </div>
 
   </form>
