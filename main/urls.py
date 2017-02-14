@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^aPurMan3/$', views.aPurMan3, name='aPurMan3'),
     url(r'^admin1/$', views.admin1, name='admin1'),
     url(r'^admin2/$', views.admin2, name='admin2'),
-    
+    url(r'^notwk/$', views.notwk, name='notwk'),   
     
     url(r'^cReq_newRequest/$', views.cReq_newRequest, name='cReq_newRequest'),
     #url('/', include())

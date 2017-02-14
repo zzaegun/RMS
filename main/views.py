@@ -41,5 +41,5 @@ def aPurMan3(request):
 def admin1(request):
     return render(request, 'd1.html', {})
 
-def admin2(request):
-    return render(request, 'd2.html', {})
+def notwk(request):
+    return render(request, 'd3.html', {})
