@@ -26,11 +26,30 @@
         </div>
       </label>
       </div>
-      <p class="text-right"><a href="" class="button">기존주문조회</a>    
-      <input type="submit" class="button" value="신규주문생성"></p>
+      <p class="text-right"><a href="/cList" class="button">기존주문조회</a>
+      <a href="#" id="trig_" class="button" data-open="submitCheck">신규주문생성</a></p>
+      
     </div>
-
   </form>
 
 </div>
+<div id="submitCheck" class="reveal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">신규주문생성</h2>
+  <p class="lead"><strong><span id="item"></span></strong> 제품 <strong><span id="no"></span></strong>개</p>
+  <p>주문번호 {{new_order}}번으로 생성하시겠습니까?</p>
+  <p class="text-right"><input type="submit" class="button" value="신규주문생성">
+  <a class="button close-reveal-modal" aria-label="Close">취소</a></p>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  
+</div>
+<script>
+    $(document).foundation();
+     
+    $('#trig_').click(function(){
+       $('#item').text($('select[name="item"]').find('option:selected').text());
+       $('#no').text($('input[type=number]').val());
+    });
+</script>
 {% endblock content %}
