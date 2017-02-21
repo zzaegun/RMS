@@ -18,10 +18,14 @@
         </thead>
         <tbody>
           <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
+            <td>{{val.ORDER_ID}}</td>
+            <td>{{val.ITEM_ID.ITEM_NAME}}</td>
+            <td>{{val.ORDER_QTY}}</td>
+            {% if val.ORDER_FIN == False %}
+            <td>미처리</td>
+            {% else %}
+            <td>처리</td>
+            {% endif %}
           </tr>
         </tbody>
       </table>
@@ -38,21 +42,24 @@
         </thead>
         <tbody>
           <tr>
-            <td>1</td>
-            <td><span style="color: red">치킨 햄자 피버거</span></td>
-            <td>30</td>
-            <td>123</td>
+            <td>{{val.ORDER_ID}}</td>
+            <td id="modif_name">{{val.ITEM_ID.ITEM_NAME}}</td>
+            <td id="modif_qty">{{val.ORDER_QTY}}</td>
+            {% if val.ORDER_FIN == False %}
+            <td>미처리</td>
+            {% else %}
+            <td>처리</td>
+            {% endif %}
           </tr>
         </tbody>
       </table>
       <br/>
       <div class="">
       <label>주문 제품 :
-        <select>
-          <option value="husker">Husker</option>
-          <option value="starbuck">Starbuck</option>
-          <option value="hotdog">Hot Dog</option>
-          <option value="apollo">Apollo</option>
+        <select name="item">
+          {% for item in items %}
+          <option value="{{item.ITEM_ID}}">{{item.ITEM_NAME}}</option>
+          {% endfor %}
         </select>
       </label>
       </div>
@@ -66,10 +73,45 @@
         </div>
       </label>
       </div>
-      <p class="text-right"><a type="submit" class="button">이전</a>    <a type="submit" class="button">확인</a></p>
+      <p>수정 버튼을 누를 시 화면 반영 사항에 노출되며, 확인을 누르면 반영됩니다.</p>
+      <p class="text-right"><a href="/cList" class="button">이전</a>  <a href="#" id="modify" class="button">수정</a>  <a href="#" id="trig_" class="button" data-open="submitCheck">확인</a></p>
     </div>
   </form>
 </div>
+
+</div>
+    <div id="submitCheck" class="reveal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      <h2 id="modalTitle">신규주문생성</h2>
+      
+      <p>주문번호 {{new_order}}번을 <strong><span id="item"></span></strong> 제품 <strong><span id="no"></span></strong>개로 수정하시겠습니까?</p>
+      <p class="text-right">
+      <button class="button" onclick="form_submit()" type="button">예</button>
+      <a class="button close-reveal-modal" data-close aria-label="Close modal">아니오</a></p>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </form>  
+    </div>
+
+<script>
+    $(document).foundation();
+
+    $('#trig_').click(function(){
+       $('#item').text($('select[name="item"]').find('option:selected').text());
+       $('#no').text($('input[type=number]').val());
+    });
+
+    $('#modify').click(function(){
+       $('#modif_name').text($('select[name="item"]').find('option:selected').text());
+       $('#modif_name').css('color','red');
+       $('#modif_qty').text($('input[type=number]').val());
+      $('#modif_qty').css('color','red');
+    });
+    function form_submit() {
+        document.getElementById("form_b3").submit();
+    }                           
+</script>
+
 {% endblock content %}
 
 

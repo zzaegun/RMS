@@ -17,10 +17,11 @@ class T_SUB_PROCESS(models.Model):
 
 class T_ORDER_INFO(models.Model):
 	ORDER_ID = models.IntegerField(db_index=True, primary_key=True)
-	ORDER_DATE = models.IntegerField(default = 0)
+	ORDER_DATE = models.DateTimeField(default = timezone.now())
 	ITEM_ID = models.ForeignKey(T_PROD_TYPE, on_delete=models.CASCADE)
 	ORDER_QTY = models.IntegerField(default = 0)
-	ORDER_FIN = models.BooleanField(default = True)
+	ORDER_FIN = models.BooleanField(default = False)
+	FIN_TIME = models.DateTimeField(null=True)
 	
 	class Meta:
 		db_table = 'T_ORDER_INFO'

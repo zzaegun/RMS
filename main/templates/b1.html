@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="medium-10 medium-centered large-12 large-centered columns">
-  <form action="{% url 'main:cReq_newRequest' %}" method="post">
+  <form action="{% url 'main:cReq_newRequest' %}" id="form_b1" method="post">
   {% csrf_token %}
     <div class="row column log-in-form">
       <h4 class="text-left">고객 주문</h4>
@@ -28,22 +28,21 @@
       </div>
       <p class="text-right"><a href="/cList" class="button">기존주문조회</a>
       <a href="#" id="trig_" class="button" data-open="submitCheck">신규주문생성</a></p>
-      
     </div>
-  </form>
+    </div>
+    <div id="submitCheck" class="reveal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      <h2 id="modalTitle">신규주문생성</h2>
+      <p class="lead"><strong><span id="item"></span></strong> 제품 <strong><span id="no"></span></strong>개</p>
+      <p>주문번호 {{new_order}}번으로 생성하시겠습니까?</p>
+      <p class="text-right">
+      <button class="button" onclick="form_submit()" type="button">신규주문생성</button>
+      <a class="button close-reveal-modal" data-close aria-label="Close modal">취소</a></p>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </form>  
+    </div>
 
-</div>
-<div id="submitCheck" class="reveal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  <h2 id="modalTitle">신규주문생성</h2>
-  <p class="lead"><strong><span id="item"></span></strong> 제품 <strong><span id="no"></span></strong>개</p>
-  <p>주문번호 {{new_order}}번으로 생성하시겠습니까?</p>
-  <p class="text-right"><input type="submit" class="button" value="신규주문생성">
-  <a class="button close-reveal-modal" aria-label="Close">취소</a></p>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  
-</div>
 <script>
     $(document).foundation();
      
@@ -51,5 +50,10 @@
        $('#item').text($('select[name="item"]').find('option:selected').text());
        $('#no').text($('input[type=number]').val());
     });
+
+    function form_submit() {
+        document.getElementById("form_b1").submit();
+    }
+                           
 </script>
 {% endblock content %}

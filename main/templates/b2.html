@@ -2,12 +2,14 @@
 
 {% block content %}
 <div class="medium-10 medium-centered large-12 large-centered columns">
-  <form>
+  
+  
     <div class="row column log-in-form">
       <h4 class="text-left">기존 주문정보 리스트</h4>
       <div class="table-scroll" style="height: 300px">
       <table class="hover" style="width: 100%">
         <thead>
+          
           <tr>
             <th width="150">주문번호</th>
             <th>주문제품</th>
@@ -17,75 +19,32 @@
           </tr>
         </thead>
         <tbody>
+        {% for val in lists %}
           <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
-            <td><a type="modify" class="button tiny" style="margin: 0">주문수정</a></td>
+          <form action="{% url 'main:cModify' %}" id="form_b2_{{val.ORDER_ID}}" method="post">
+        {% csrf_token %}
+          
+            <td>{{val.ORDER_ID}}</td>
+            <td>{{val.ITEM_ID.ITEM_NAME}}</td>
+            <td>{{val.ORDER_QTY}}</td>
+            
+            {% if val.ORDER_FIN == False %}
+            <td>미처리</td>
+            <td>
+            <input type="hidden" name="item" value="{{val.ORDER_ID}}">
+            <input type="submit" value="주문수정" class="button tiny">
+            </td>
+            {% else %}
+            <td>처리</td>
+            <input type="hidden" name="item" value="{{val.ORDER_ID}}">
+            <input type="submit" value="확약주문수정" class="button tiny">
+            {% endif %}
           </tr>
-          <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
-            <td><a type="modify" disabled class="button tiny" style="margin: 0">주문수정</a></td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>치킨 피자 햄버거</td>
-            <td>30</td>
-            <td>123</td>
-            <td><a type="modify" class="button tiny" style="margin: 0">주문수정</a></td>
-          </tr>
+        </form>
+          {% endfor %}
         </tbody>
       </table>
       </div>
       <br/>
-      <p class="text-right"><a type="submit" class="button">확약주문수정</a></p>
-  </form>
-
 </div>
 {% endblock content %}
