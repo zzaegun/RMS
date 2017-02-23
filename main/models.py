@@ -1,10 +1,18 @@
 from django.db import models
 from django.utils import timezone
 
+class T_PROD_PROCESS(models.Model):
+	PROCESS_ID = models.IntegerField(db_index=True, primary_key=True)
+	SUBPROC_ORDER = models.TextField()
+	PROCESS_NAME = models.CharField(max_length=10)
+	class Meta:
+		db_table = 'T_PROD_PROCESS'
+
+
 class T_PROD_TYPE(models.Model):
 	ITEM_ID = models.IntegerField(db_index=True, primary_key=True)
 	ITEM_NAME = models.CharField(max_length=10)
-
+	PROCESS_ID = models.ForeignKey(T_PROD_PROCESS, on_delete=models.CASCADE, default=1)
 	class Meta:
 		db_table = 'T_PROD_TYPE'
 
@@ -26,12 +34,6 @@ class T_ORDER_INFO(models.Model):
 	class Meta:
 		db_table = 'T_ORDER_INFO'
 
-class T_PROD_PROCESS(models.Model):
-	PROCESS_ID = models.IntegerField(db_index=True, primary_key=True)
-	SUBPROC_ORDER = models.TextField()
-	PROCESS_NAME = models.CharField(max_length=10)
-	class Meta:
-		db_table = 'T_PROD_PROCESS'
 
 class T_MACHINE_STATUS(models.Model):
 	MACHINE_ID = models.IntegerField(db_index=True, primary_key=True)

@@ -49,30 +49,43 @@
 .menu-text{
 	color: white;
 }
+
 #proc{
-  top: 10px;
+  top: 7px;
   left: 2.5%;
-  width: 1000px;
+  width: 1050px;
   height: 180px;
-  background-color: #CCCCCC;
+  background-color: #ECECEC;
   position: relative;
   border: black 1px solid;
   vertical-align: middle;
   text-align: center;
   display: table-cell;
+
 }
 
 .subproc{
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   border: black 1px solid;
   background-color: white;
+  float: left;
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
 }
 [class^=arr-]{
   border: solid currentColor;
   border-width: 0 .2em .2em 0;
   display: inline-block;
   padding: .20em;
+  float: left;
+  margin: 0 10px;
+  margin-top: 50px;
+}
+
+.c2_sp_margin {
+  padding-top: 45px;
 }
 
 .arr-right {

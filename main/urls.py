@@ -5,6 +5,8 @@ from . import views
 app_name = 'main'
 
 urlpatterns = [
+        
+    #views
     url(r'^test/$', views.test, name='test'),
     url(r'^login/$', views.login, name='login'),
     url(r'^cReq/$', views.cReq, name='cReq'),
@@ -18,6 +20,8 @@ urlpatterns = [
     url(r'^admin2/$', views.admin2, name='admin2'),
     url(r'^notwk/$', views.notwk, name='notwk'),   
     
+    #logical things
     url(r'^cReq_newRequest/$', views.cReq_newRequest, name='cReq_newRequest'),
+    url(r'^cModify_Request/$', views.cModify_Request, name='cModify_Request'),
     #url('/', include())
 ]

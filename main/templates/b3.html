@@ -2,7 +2,8 @@
 
 {% block content %}
 <div class="medium-10 medium-centered large-12 large-centered columns">
-  <form>
+  <form action="{% url 'main:cModify_Request' %}" id="form_b3" method="post">
+  {% csrf_token %}
     <div class="row column log-in-form">
       <h4 class="text-left">주문정보 수정</h4>
       <br/>
@@ -68,12 +69,13 @@
         주문 수량 : 
         <div class="input-group">
           
-          <input class="input-group-field" type="number">
+          <input name="num" class="input-group-field" type="number">
           <span class="input-group-label">EA</span>
         </div>
       </label>
       </div>
       <p>수정 버튼을 누를 시 화면 반영 사항에 노출되며, 확인을 누르면 반영됩니다.</p>
+      <input type="hidden" name="ord" value="{{val.ORDER_ID}}">
       <p class="text-right"><a href="/cList" class="button">이전</a>  <a href="#" id="modify" class="button">수정</a>  <a href="#" id="trig_" class="button" data-open="submitCheck">확인</a></p>
     </div>
   </form>
@@ -81,9 +83,9 @@
 
 </div>
     <div id="submitCheck" class="reveal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-      <h2 id="modalTitle">신규주문생성</h2>
+      <h2 id="modalTitle">주문정보 수정</h2>
       
-      <p>주문번호 {{new_order}}번을 <strong><span id="item"></span></strong> 제품 <strong><span id="no"></span></strong>개로 수정하시겠습니까?</p>
+      <p>주문번호 {{val.ORDER_ID}}번을 <strong><span id="item"></span></strong> 제품 <strong><span id="no"></span></strong>개로 수정하시겠습니까?</p>
       <p class="text-right">
       <button class="button" onclick="form_submit()" type="button">예</button>
       <a class="button close-reveal-modal" data-close aria-label="Close modal">아니오</a></p>
@@ -107,6 +109,7 @@
        $('#modif_qty').text($('input[type=number]').val());
       $('#modif_qty').css('color','red');
     });
+
     function form_submit() {
         document.getElementById("form_b3").submit();
     }                           

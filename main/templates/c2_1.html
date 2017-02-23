@@ -2,7 +2,7 @@
 
 {% block content %}
         <div class="medium-10 medium-centered large-12 large-centered columns">
-          <form>
+          <form action="{% url 'main:aPurMan2' %}" id="form_c21" method="post">>
           {% csrf_token %}
             <div class="row column log-in-form">
               <h4 class="text-left">주문정보 처리</h4>
@@ -27,16 +27,17 @@
                     {% if last_val.ORDER_FIN == False %}
                     <td>미처리</td>
                     {% else %}
-                    <td>처리</td>
+                    <td style="color: blue">처리</td>
                     {% endif %}
                   </tr>
                     {% else %}
                     <td>
+                    -
                     </td>
-                    <td>
-
+                    <td style="color: red">
                     일해라 영업부장!!!!
                     </td>
+                    <td>-</td><td>-</td>
                     {% endif %}
                   
                 </tbody>
@@ -69,18 +70,16 @@
               <h6><strong>전체 생산 프로세스 표시 UI</strong></h6>
               <div class="c2-image">
                 <div id="proc">
+                {% for sub in subprc %}
+                
                 <i class="arr-right"></i>
-                <div class="subproc"></div>
-
-                <i class="arr-right"></i>
-                <div class="subproc"></div>
-
-                <i class="arr-right"></i>
-                <div class="subproc"></div>
+                <div class="subproc c2_sp_margin" class="c2_sp_margin"><div>{{sub}}번 서브</div></div>
+                
+                {% endfor %}
                 </div>
               </div>
               <br/>
-              <p class="text-right"><a type="submit" class="button">이전</a>    <a type="submit" class="button">확인</a></p>
+              <p class="text-right"><a href="/aPur" class="button">이전</a> <a type="submit" class="button">확인</a></p>
             </div>
 
           </form>
