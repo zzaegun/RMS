@@ -32,12 +32,12 @@
             <td>미처리</td>
             <td>
             <input type="hidden" name="item" value="{{val.ORDER_ID}}">
-            <input type="submit" value="주문수정" class="button tiny">
+            <input type="submit" value="주문수정" class="button tiny" style="margin:0">
             </td>
             {% else %}
             <td>처리</td>
             <input type="hidden" name="item" value="{{val.ORDER_ID}}">
-            <input type="submit" value="확약주문수정" class="button tiny">
+            <input type="submit" value="확약주문수정" class="button tiny" style="margin:0">
             {% endif %}
           </tr>
         </form>

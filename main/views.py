@@ -64,10 +64,21 @@ def cModify(request):
 	return render(request, 'b3.html', {'items': items, 'val': item})
 
 def aPur(request):
-	return render(request, 'c1.html', {})
+	lists = T_ORDER_INFO.objects.all()
+	return render(request, 'c1.html', {'lists': lists})
 
 def aPurMan1(request):
-	return render(request, 'c2_1.html', {})
+	last_available = True
+	fin_items = T_ORDER_INFO.objects.all().filter(ORDER_FIN = True)
+	if fin_items.count() != 0:
+		last_item = fin_items.latest('ORDER_ID').ORDER_ID
+	else:
+		last_item = 0
+		last_available = False
+
+	item = T_ORDER_INFO.objects.all().get(pk=request.POST['item'])
+	
+	return render(request, 'c2_1.html', {'last_available': last_available, 'last_val': last_item, 'now_val': item})
 
 def aPurMan2(request):
 	return render(request, 'c2_2.html', {})

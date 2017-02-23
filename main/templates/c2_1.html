@@ -3,6 +3,7 @@
 {% block content %}
         <div class="medium-10 medium-centered large-12 large-centered columns">
           <form>
+          {% csrf_token %}
             <div class="row column log-in-form">
               <h4 class="text-left">주문정보 처리</h4>
               <br/>
@@ -17,12 +18,27 @@
                   </tr>
                 </thead>
                 <tbody>
+                  
+                    {% if last_available == True %}
                   <tr>
-                    <td>1</td>
-                    <td>치킨 피자 햄버거</td>
-                    <td>30</td>
-                    <td>123</td>
+                    <td>{{last_val.ORDER_ID}}</td>
+                    <td>{{last_val.ITEM_ID.ITEM_NAME}}</td>
+                    <td>{{last_val.ORDER_QTY}}</td>
+                    {% if last_val.ORDER_FIN == False %}
+                    <td>미처리</td>
+                    {% else %}
+                    <td>처리</td>
+                    {% endif %}
                   </tr>
+                    {% else %}
+                    <td>
+                    </td>
+                    <td>
+
+                    일해라 영업부장!!!!
+                    </td>
+                    {% endif %}
+                  
                 </tbody>
               </table>
               <br/>
@@ -38,16 +54,31 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td>
-                    <td><span style="color: red">치킨 햄자 피버거</span></td>
-                    <td>30</td>
-                    <td>123</td>
+                    <td>{{now_val.ORDER_ID}}</td>
+                    <td>{{now_val.ITEM_ID.ITEM_NAME}}</td>
+                    <td>{{now_val.ORDER_QTY}}</td>
+                    {% if now_val.ORDER_FIN == False %}
+                    <td>미처리</td>
+                    {% else %}
+                    <td>처리</td>
+                    {% endif %}
                   </tr>
                 </tbody>
               </table>
               <br/>
               <h6><strong>전체 생산 프로세스 표시 UI</strong></h6>
-              <div class="c2-image"></div>
+              <div class="c2-image">
+                <div id="proc">
+                <i class="arr-right"></i>
+                <div class="subproc"></div>
+
+                <i class="arr-right"></i>
+                <div class="subproc"></div>
+
+                <i class="arr-right"></i>
+                <div class="subproc"></div>
+                </div>
+              </div>
               <br/>
               <p class="text-right"><a type="submit" class="button">이전</a>    <a type="submit" class="button">확인</a></p>
             </div>

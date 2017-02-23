@@ -14,6 +14,7 @@
   padding-right: 30px !important;
   border-radius: 3px; 
   background-color: white;
+  overflow: scroll;
 }
 .b1-image {
 	border: 2px solid #1779ba;
@@ -48,4 +49,14 @@
 
 .menu-text{
 	color: white;
+}
+
+#proc{
+  top: 5%;
+  left: 2.5%;
+  width: 95%;
+  height: 90%;
+  background-color: #CCCCCC;
+  position: relative;
+  border: black 1px solid;
 }
