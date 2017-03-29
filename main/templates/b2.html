@@ -6,7 +6,7 @@
   
     <div class="row column log-in-form">
       <h4 class="text-left">기존 주문정보 리스트</h4>
-      <div class="table-scroll" style="height: 300px">
+      <div class="table-scroll" style="margin-top:25px; height: 300px">
       <table class="hover" style="width: 100%">
         <thead>
           
@@ -36,15 +36,21 @@
             </td>
             {% else %}
             <td>처리</td>
+            <td>
             <input type="hidden" name="item" value="{{val.ORDER_ID}}">
             <input type="submit" value="확약주문수정" class="button tiny" style="margin:0">
+            </td>
             {% endif %}
           </tr>
         </form>
           {% endfor %}
         </tbody>
       </table>
+      
+      
       </div>
       <br/>
+      <p class="text-right">
+      <a href="/cReq" class="button">신규주문생성</a></p>
 </div>
 {% endblock content %}

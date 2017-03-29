@@ -2,35 +2,49 @@
 
 {% block content %}
         <div class="medium-10 medium-centered large-12 large-centered columns">
-          <form>
+            
             <div class="row column log-in-form">
               <h4 class="text-left">설비 고장 정보 조회</h4>
               <div class="table-scroll" style="height: 300px">
               <table class="hover" style="width: 100%">
                 <thead>
                   <tr>
-                    <th width="150">고장 설비</th>
-                    <th width="100">할당량</th>
-                    <th width="250">고장 상태</th>
+                    <th width="200">설비명</th>
+                    <th width="150">LOAD/CAPA</th>
+                    <th width="100">고장 상태</th>
                     <th>영향 스케쥴</th>
-                    <th width="100">주문대응</th>
+                    <th width="130">대체설비선택</th>
+                    <th width="120">해결완료</th>
                   </tr>
                 </thead>
                 <tbody>
+                {% for machine in machines %}
+                  {% if machine.MACHINE_ENABLED == 0 %}
+                    
                   <tr>
-                    <td>막대기</td>
-                    <td>3</td>
-                    <td>맛감</td>
-                    <td>없음</td>
-                    <td><a type="modify" class="button tiny" style="margin: 0">주문대응</a></td>
-                  </tr>
-                  <tr>
-                    <td>꼬챙이</td>
-                    <td>32</td>
-                    <td>부서짐</td>
-                    <td>없음</td>
-                    <td><a type="modify" class="button tiny" style="margin: 0">주문대응</a></td>
-                  </tr>
+
+                    <td class="name">{{machine.MACHINE_NAME}}</td>
+                    
+                    <td style="text-align: center;"">{{machine.MACHINE_LOAD}}/{{machine.MACHINE_CAPA}}</td>
+                
+                    <td style="text-align: center; color: red;">고장</td>
+                    <td>
+                    {{machine.MACHINE_RELATED}}
+                    </td>
+
+                    <td style="text-align: center;">
+                    <p class="id" style="display: none">{{machine.MACHINE_ID}}</p>
+                    <a href="#" class="trig_ button tiny" style="margin: 0" data-open="submitCheck">대체설비선택</a>
+                    </td>
+                    <form action="{% url 'main:notwk_setEnabled' %}" id="form_d31" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="item" value="{{machine.MACHINE_ID}}"/>
+                    <td style="text-align: center;"> <input type="submit" value="해결완료" class="button tiny" style="margin: 0"></a></td>
+                    </form>
+                    </tr>
+                 {% endif %}
+
+                {% endfor %}
                 </tbody>
               </table>
               </div>
@@ -38,15 +52,17 @@
               <h6><strong>설비 고장 등록</strong></h6>
 
               
-              
+              <form action="{% url 'main:notwk_setUnabled' %}" id="form_d32" method="post">
+              {% csrf_token %}
               <label>
                 설비 리스트 : 
               <div class="input-group">
-                  <select style="margin: 0">
-                  <option value="husker">Husker</option>
-                  <option value="starbuck">Starbuck</option>
-                  <option value="hotdog">Hot Dog</option>
-                  <option value="apollo">Apollo</option>
+                  <select name="item" style="margin: 0">
+                  {% for machine in machines %}
+                  {% if machine.MACHINE_ENABLED == 1 %}
+                  <option value="{{machine.MACHINE_ID}}">{{machine.MACHINE_NAME}}</option>
+                  {% endif %}
+                  {% endfor %}
                 </select>
               </label>
                 <div class="input-group-button">
@@ -54,9 +70,61 @@
                 </div>
               </div>
 
-              <p class="text-right"><a type="submit" class="button">확인</a></p>
+              <p class="text-right"><a href="javascript:history.back(-1)" type="submit" class="button">이전</a> <a type="submit" class="button">확인</a></p>
               
           </form>
 
         </div>
+        </div>
+        <div id="submitCheck" class="reveal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <form action="{% url 'main:notwk_selectAlternate' %}" id="form_d33" method="post">
+          {% csrf_token %}
+          <h2 id="modalTitle">대체설비 선택</h2>
+          <input id="old" name="old" type="hidden" value=""/>
+          <p>고장설비 <span id="item"></span>(<span id="no"></span>번 설비)을/를 대체할 설비를 아래의 목록에서 선택 후 확인 버튼을 눌러주세요.</p>
+          <div class="input-group">
+            <select name="item" style="margin: 0">
+            </select>
+          </div>
+          <p class="text-right">
+          <button class="button" onclick="form_submit()" type="button">예</button>
+          <a class="button close-reveal-modal" data-close aria-label="Close modal">아니오</a></p>
+          <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          </form>  
+        </div>
+
+        <script>
+    $(document).foundation();
+
+    $('.trig_').click(function(){
+      if($('select[name=item]').children('option').length == 0) return;
+      id = $(this).parent().parent().find(".id").text();
+      name = $(this).parent().parent().find(".name").text()
+      $('#submitCheck select[name=item]').empty()
+       $('#item').text(name);
+       $('#no').text(id);
+       $('#old').val(id)
+       {% for machine in machines %}
+        if({{machine.MACHINE_ID}} == $(this).parent().parent().find(".id").text()) {
+          id = {{machine.SUBPROC_ID.SUBPROC_ID}};
+        }
+        {% endfor %}
+        
+        {% for machine in machines %}
+        if({{machine.SUBPROC_ID.SUBPROC_ID}} == id) {
+          {% if machine.MACHINE_ENABLED == 1 %}
+          
+          $('#submitCheck select[name=item]').append($('<option>', {value: "{{machine.MACHINE_ID}}",text: "{{machine.MACHINE_NAME}}"}));
+          {% endif %}
+        }
+        {% endfor %}
+       
+    });
+
+    function form_submit() {
+        document.getElementById("form_d33").submit();
+    }                           
+</script>
 {% endblock content %}

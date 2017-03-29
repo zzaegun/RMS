@@ -7,8 +7,9 @@ app_name = 'main'
 urlpatterns = [
         
     #views
+    url(r'^$', views.test),
     url(r'^test/$', views.test, name='test'),
-    url(r'^login/$', views.login, name='login'),
+    url(r'^login/$', views.test, name='login'),
     url(r'^cReq/$', views.cReq, name='cReq'),
     url(r'^cList/$', views.cList, name='cList'),
     url(r'^cModify/$', views.cModify, name='cModify'),
@@ -23,5 +24,9 @@ urlpatterns = [
     #logical things
     url(r'^cReq_newRequest/$', views.cReq_newRequest, name='cReq_newRequest'),
     url(r'^cModify_Request/$', views.cModify_Request, name='cModify_Request'),
+    url(r'^notwk_setUnabled/$', views.notwk_setUnabled, name='notwk_setUnabled'),
+    url(r'^notwk_setEnabled/$', views.notwk_setEnabled, name='notwk_setEnabled'),
+    url(r'^notwk_selectAlternate/$', views.notwk_selectAlternate, name='notwk_selectAlternate'),
+    url(r'^aPurMan3_addSchedule/$', views.aPurMan3_addSchedule, name='aPurMan3_addSchedule'),
     #url('/', include())
 ]

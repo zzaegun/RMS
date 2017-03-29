@@ -4,7 +4,7 @@
 <div class="medium-6 medium-centered large-4 large-centered columns">
 	<form>
 	<div class="row column log-in-form">
-		<h4 class="text-center">Log in</h4>
+		<h4 class="text-center">RMS 로그인</h4>
 		
 		<label>ID
 		<input type="text" placeholder="ID">
@@ -14,9 +14,11 @@
 		<input type="text" placeholder="Password">
 		</label>
 	
-		<input id="show-password" type="checkbox"><label for="show-password">Show password</label>
-		<p><a type="submit" class="button expanded">Log In</a></p>
-		<p class="text-center"><a href="#">Forgot your password?</a></p>   
+		<input id="show-password" type="checkbox"><label for="show-password">비밀번호 표시</label><br/>
+		<input id="user-mode" type="checkbox"><label for="user-mode">사용자 모드로 로그인 (관리자)</label>
+		<p><a href="/cReq" type="submit" class="button expanded">로그인</a></p>
+		<p><a href="/admin1" type="submit" class="button expanded">관리자 로그인</a></p>
+		<!--<p class="text-center"><a href="#">Forgot your password?</a></p>-->
 	</div>
 	</form>
 </div>

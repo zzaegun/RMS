@@ -1,21 +1,91 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <div class="medium-10 medium-centered large-12 large-centered columns">
+        <div class="main medium-10 medium-centered large-12 large-centered columns">
+          <form action="{% url 'main:aPurMan3_addSchedule' %}" id="form_c23" method="post">
+          {% csrf_token %}
           <form>
             <div class="row column log-in-form">
               <h4 class="text-left">주문정보 처리</h4>
               <br/>
-              <h6><strong>서브 생산 프로세스</strong></h6>
-              <div class="c2-image"></div>
+              <h6><strong>{{now_val.ORDER_ID}}번 주문에 대한 조립스케줄 작성</strong></h6>
+              <div class="c2-image" style="height: 410px">
+                <div id="proc">
+                {% for sub in subprc %}
+                <i class="arr-right"></i>
+                <div id="{{sub}}" class="subproc c2_sp_margin"><div>
+                </div></div>
+                {% endfor %}
+                </div>
+                <br/>
+                <div id="proc">
+                {% for sub in subprc %}
+                <i class="arr-right"></i>
+                <div style="width: 120px; float: left">
+                <div class="subproc2">
+                <span><strong>시작일자</strong></span>
+                <p id="start_{{sub}}" style="color: blue;"></p>
+                <!--<input type="text" class="span2" id="start_{{sub}}" style="font-size:0.7rem">-->
+                <div>
+                </div></div>
+                <div class="subproc2">
+                <span><strong>완료일자</strong></span>
+                <p id="end_{{sub}}" style="color: red;"></p>
+                <div>
+                </div></div>
+                </div>
+                {% endfor %}
+                </div>
+              </div>
+
               <br/>
-              <h6><strong>조립스케줄 작성</strong></h6>
-              <div class="c2-image"></div>
               <br/>
-              <p class="text-right"><a type="submit" class="button">이전</a>    <a type="submit" class="button">확인</a></p>
+              <input type="hidden" name="start_time"/>
+              <input type="hidden" name="end_time"/>
+              <input type="hidden" name="machine"/>
+              <input type="hidden" name="order_no"/>
+              <p class="text-right"><a href="javascript:history.back(-1)" type="submit" class="button">이전</a> <button class="button" onclick="form_submit()" type="button">확인</button></a></p>
             </div>
 
           </form>
 
         </div>
+        <script>
+
+        $(document).ready(function(){
+          MACHINE = []
+          {% for sprc in sprc_list %}
+            $("#{{sprc.SUBPROC_ID}}>div").html("{{sprc.SUBPROC_NAME}}")
+          {% endfor %}
+
+          {% with sprc_list|first as sprc %}
+            $("#sub_screen_{{sprc.SUBPROC_ID}}").css("display", "block");
+          {% endwith %}
+
+
+          {% for machine in machine_info %}
+          st = '{{machine.start_time|date:"Y-m-d H:i"}}'
+          et = '{{machine.end_time|date:"Y-m-d H:i"}}'
+          /*$('#start_{{sub}}').fdatepicker({
+            initialDate: date,
+            format: 'yyyy/mm/dd hh:ii',
+            disableDblClickSelection: true,
+            leftArrow:'<<',
+            rightArrow:'>>',
+            pickTime: true
+          });*/
+          $('#start_{{machine.subprc}}').text(st);
+          $('#end_{{machine.subprc}}').text(et);
+          MACHINE.push({{machine.machine}})
+          {% endfor %}
+        });
+
+        function form_submit() {
+          $("input[name=start_time]").val($("p[id^=end]").first().text())
+          $("input[name=end_time]").val($("p[id^=end]").last().text())
+          $("input[name=machine]").val(MACHINE)
+          $("input[name=order_no]").val({{now_val.ORDER_ID}})
+          document.getElementById("form_c23").submit();
+        }    
+        </script>
 {% endblock content %}

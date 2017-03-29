@@ -2,20 +2,117 @@
 
 {% block content %}
         <div class="medium-10 medium-centered large-12 large-centered columns">
-          <form>
+          <form action="{% url 'main:aPurMan3' %}" id="form_c22" method="post">
+          {% csrf_token %}
             <div class="row column log-in-form">
               <h4 class="text-left">주문정보 처리</h4>
               <br/>
               <h6><strong>단위 생산공정</strong></h6>
-              <div class="c2-image"></div>
+              <div class="c2-image">
+                <div id="proc">
+                {% for sub in subprc %}
+                
+                <i class="arr-right"></i>
+                <a id="{{sub}}" class="subproc c2_sp_margin c2_hover"></a>
+                </a>
+                
+                {% endfor %}
+                </div>
+              </div>
               <br/>
               <h6><strong>단위 생산 설비 정보</strong></h6>
-              <div class="c2-image"></div>
+              {% for sprc in sprc_list %}
+                {% if sprc.SUBPROC_ID in subprc %}
+              
+              <div id="sub_screen_{{sprc.SUBPROC_ID}}" style="display:none; overflow-y: scroll;" class="c2-image">
+                {% with sprc.t_machine_status_set.all as machines %}
+                  
+                  <table class="hover" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th width="80">선택</th>
+                        <th width="100">설비번호</th>
+                        <th width="120">설비명</th>
+                        <th width="100">설비부하</th>
+                        <th width="130">생산리드타임</th>
+                        <th width="90">설비용량</th>
+                        <th>생산가능시간</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for m in machines %}
+                      <tr>
+                        {% if m.MACHINE_ENABLED == 1 %}
+                        <td><input type="radio" name="sel_sp_{{sprc.SUBPROC_ID}}" value="{{m.MACHINE_ID}}" style="margin: 0"></td>
+
+                        <td>{{m.MACHINE_ID}}</td>
+                        <td>{{m.MACHINE_NAME}}</td>
+                        <td>{{m.MACHINE_LOAD}}</td>
+                        <td>{{m.MACHINE_LT}}</td>
+                        <td>{{m.MACHINE_CAPA}}</td>
+                        <td>{{m.MACHINE_SCHED}}</td>
+                        {% endif %}                        
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  
+                {% endwith %} 
+                
+              </div>
+              {% endif %}
+              {% endfor %}
               <br/>
-              <p class="text-right"><a type="submit" class="button">이전</a>    <a type="submit" class="button">확인</a></p>
+              <input type="hidden" name="item" value="{{now_val.ORDER_ID}}">
+              <p id="warn" style="display: none;">모든 설비 버튼을 선택해주세요.</p>
+              <p class="text-right"><a href="javascript:history.back(-1)"  type="submit" class="button">이전</a> <button class="button" onclick="form_submit()" type="button">확인</button></p>
             </div>
+            
 
           </form>
+        <script>
 
+        $(document).ready(function(){
+          {% for sprc in sprc_list %}
+            $("#{{sprc.SUBPROC_ID}}").text("{{sprc.SUBPROC_NAME}}");
+          {% endfor %}
+
+          //% with sprc_list|first as sprc %
+          {% with subprc|first as sub %}
+          console.log("{{sub}}")
+            $("#sub_screen_{{sub}}").css("display", "block");
+          {% endwith %}
+        });
+
+
+        $(".c2_hover").click(function(){
+          {% for sprc in sprc_list %}
+          if(this.id == {{sprc.SUBPROC_ID}}) {
+            $("div[id^=sub_screen").css("display", "none");
+            $("#sub_screen_{{sprc.SUBPROC_ID}}").css("display", "block");
+            /**
+            % with sprc.t_machine_status_set.all|first as machine %
+              $("#sub_screen_{{sprc.SUBPROC_ID}}").html("{{machine.MACHINE_ID}}")
+            % endwith %
+            **/
+
+            //$("#sub_screen").html("<span>"+"{{sprc.SUBPROC_ID}} + {{sprc.t_machine_status_set}}"+"</span>")
+          }
+          {% endfor %}
+        
+        });
+
+        function form_submit() {
+          arr = {{subprc}}
+          for(i in arr) {
+            if($("input[name=sel_sp_"+arr[i]+"]:checked").val() == undefined) {
+              $("#warn").css("display", "block")
+              return;
+            }
+          }
+          document.getElementById("form_c22").submit();
+        }
+
+        </script>
         </div>
 {% endblock content %}

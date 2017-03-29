@@ -1,11 +1,32 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 * {font-family:'Nanum Gothic', sans-serif !important;}
 
+.main,body>.top-bar {
+  min-width: 1200px;
+}
+
+th{
+  text-align: center !important;
+}
+
+td { 
+  cursor: pointer; 
+}
+
+body>.top-bar {
+  min-height: 80px;
+}
+
+.top-bar, .top-bar ul {
+  background-color: #1779ba !important;
+}
+
 .container {
 	background-image: url('../bg.jpg');
 	height: 100%;
-    position: fixed;
-    width: 100%;
+  position: fixed;
+  width: 100%;
+  overflow-y: auto;
 }
 .log-in-form {
   border: 2px solid #cacaca;
@@ -14,26 +35,22 @@
   padding-right: 30px !important;
   border-radius: 3px; 
   background-color: white;
+  margin-bottom: 100px;
 }
-.b1-image {
+.b1-image, .c2-image {
 	border: 2px solid #1779ba;
 	height:200px;
 }
-.c2-image {
-  border: 2px solid #1779ba;
-  height:200px;
-}
+
 .d1-image {
   border: 2px solid #1779ba;
   height:250px;
 }
+
 .d1-time {
   border: 2px solid #cacaca;
   height:50px;
   margin-top: 10px;
-}
-.top-bar, .top-bar ul {
-	background-color: #1779ba !important;
 }
 
 .log{
@@ -42,12 +59,20 @@
 }
 
 .container>.row{
-	top: 150px;
-    position: relative;
+	top: 50px;
+  position: relative;
 }
 
 .menu-text{
 	color: white;
+}
+
+.miniproc{
+  overflow-x: auto;
+  width: 1080px !important;
+  position: relative;
+  left: 2.5%; 
+  padding-top: 10px;
 }
 
 #proc{
@@ -61,8 +86,9 @@
   vertical-align: middle;
   text-align: center;
   display: table-cell;
-
 }
+
+
 
 .subproc{
   width: 120px;
@@ -74,6 +100,24 @@
   text-align: center;
   display: table-cell;
 }
+
+.subproc2{
+  width: 120px;
+  height: 70px;
+  margin-bottom: 5px;
+  border: black 1px solid;
+  background-color: white;
+  float: left;
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
+}
+
+.subproc2>p{
+  margin-top: 3px;
+  font-size:0.7rem;
+}
+
 [class^=arr-]{
   border: solid currentColor;
   border-width: 0 .2em .2em 0;
@@ -84,6 +128,10 @@
   margin-top: 50px;
 }
 
+.minipointer{
+  margin-top:185px !important;
+}
+
 .c2_sp_margin {
   padding-top: 45px;
 }
@@ -91,4 +139,16 @@
 .arr-right {
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45dig);
+}
+
+.c2_hover {
+  color: black;
+}
+
+.c2_hover:hover {
+  background: grey;
+}
+
+#sub_screen {
+  padding: 10px;
 }

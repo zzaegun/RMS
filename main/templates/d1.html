@@ -5,128 +5,163 @@
           <form>
             <div class="row column log-in-form">
               <div class="row">
-
-                <div class="large-6 columns">
                   <div class="row">
-                    <div class="large-6 columns"><h4 class="text-left">등록 주문정보 리스트</h4></div>
-                    <div class="large-6 columns text-right"><a type="submit" class="text-right button">신규주문 확인</a></div>
+                    <div class="large-6 columns"><h4 class="text-left" style="margin-left: 30px">등록 주문정보 리스트</h4></div>
+                    <div class="large-6 columns text-right"><a href="/aPur" type="submit" class="text-right button">신규주문 확인</a> <a href="/notwk" type="submit" class="text-right button">설비 고장 조회</a></div>
                   </div>
                   <br/>
-                  <div class="table-scroll" style="height: 500px">
+                  <div class="table-scroll miniproc" style="overflow-y: scroll; height: 150px; margin-bottom: 30px">
                     <table class="hover" style="width: 100%">
                       <thead>
                         <tr>
                           <th width="150">주문번호</th>
                           <th>주문제품</th>
                           <th width="100">제품수량</th>
-                          <th width="100">제품처리</th>
                         </tr>
                       </thead>
                       <tbody>
+                        {% for schedule in schedules %}
                         <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
+                          <td>{{schedule.SCHEDULE_ID}}</td>
+                          <td>{{schedule.ORDER_ID.ITEM_ID.ITEM_NAME}}</td>
+                          <td>{{schedule.MACHINE_QTY}}</td>
                         </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                          <td>123</td>
-                        </tr>
-
+                        {% endfor %}
                       </tbody>
                     </table>
                   </div>
-                </div>
-                <div class="large-6 columns">
                   <div class="row">
-                    <div class="large-6 columns"><h4 class="text-left">주문정보 리스트 </h4></div>
-                    <div class="large-6 columns text-right"><a type="submit" class="text-right button">설비 고장 조회</a></div>
+                    <div class="large-6 columns"><h4 class="text-left" style="margin-left: 30px; ">스케줄 상세 정보</h4></div>
                   </div>
-                  <br/>
-                  <div class="table-scroll" style="height: 500px">
-                    <h6><strong>설비 정보</strong></h6>
-                    <table class="hover" style="width: 100%">
-                      <thead>
-                        <tr>
-                          <th width="150">주문</th>
-                          <th>작업</th>
-                          <th width="100">번호</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>치킨 피자 햄버거</td>
-                          <td>30</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="d1-image">설비 이미지</div>
-                    <div class="d1-time">현재 시각, 생산량, 계획량</div>
+                  <div class="table-scroll" style="height: 440px">
+                  <div id="proc" class="miniproc" style="height: 420px;">
+                  
+                  <!--single-->
+                  
+
+                  <!--multi-->
+                  
+
+
                   </div>
+                  </div>
+                  </div>
+                  <p class="text-right"><a href="javascript:history.back(-1)" type="submit" class="button">이전</a></p>
                 </div>
+
               </div>
-                
-            </div>
 
           </form>
 
         </div>
+        <script>
+    $(document).foundation();
+
+    var structure = function(){
+      return '<div style="width: 10px; position: relative; float: left;">\
+                  \
+                  <div style="height: 200px;">\
+                  </div>\
+                  \
+                  <div style="height: 200px;">\
+                  </div>\
+                  </div>'
+    }
+    var single = function(color, a, b, c) {
+      return '<i class="arr-right minipointer"></i>\
+                  <div style="width: 120px; top: 100px; position: relative; float: left;">\
+                  <div style="height: 200px;">\
+                  <div class="subproc2" style="height: 30px; background-color: '+ color +'">\
+                  <p id="name_{{sub}}" style="color: blue;">'+a+'</p>\
+                  </div>\
+                  <div class="subproc2" style="background-color: '+ color +'">\
+                  <span><strong>시작일자</strong></span>\
+                  <p id="start_{{sub}}" style="color: blue;">'+b+'</p>\
+                  </div>\
+                  <div class="subproc2" style="background-color: '+ color +'">\
+                  <span><strong>완료일자</strong></span>\
+                  <p id="end_{{sub}}" style="color: red;">'+c+'</p>\
+                  </div>\
+                  </div>\
+                  </div>'
+    }
+
+    var double = function(c1, c2, obj) {
+      return '<i class="arr-right minipointer"></i>\
+                  <div style="width: 120px; position: relative; float: left;">\
+                  \
+                  <div style="height: 200px;">\
+                  <div class="subproc2" style="height: 30px; background-color: '+ c1 +'">\
+                  <p id="name_{{sub}}" style="color: blue;">'+obj[0].name+'</p>\
+                  </div>\
+                  <div class="subproc2"  style="background-color: '+ c1 +'">\
+                  <span><strong>시작일자</strong></span>\
+                  <p id="start_{{sub}}" style="color: blue;">'+obj[0].start_time+'</p>\
+                  </div>\
+                  <div class="subproc2" style="background-color: '+ c1 +'">\
+                  <span><strong>완료일자</strong></span>\
+                  <p id="end_{{sub}}" style="color: red;">'+obj[0].end_time+'</p>\
+                  </div>\
+                  </div>\
+                  \
+                  <div style="height: 200px;">\
+                  <div class="subproc2" style="height: 30px; background-color: '+ c2 +'">\
+                  <p id="name_{{sub}}" style="color: blue;">'+obj[1].name+'</p>\
+                  </div>\
+                  <div class="subproc2" style="background-color: '+ c2 +'">\
+                  <span><strong>시작일자</strong></span>\
+                  <p id="start_{{sub}}" style="color: blue;">'+obj[1].start_time+'</p>\
+                  </div>\
+                  <div class="subproc2" style="background-color: '+ c2 +'">\
+                  <span><strong>완료일자</strong></span>\
+                  <p id="end_{{sub}}" style="color: red;">'+obj[1].end_time+'</p>\
+                  </div>\
+                  </div>\
+                  </div>'
+    }
+    var generate = function(sche) {
+      result = "";
+      chain = []
+
+      {% for schedule in schedules %}
+      
+      if({{schedule.SCHEDULE_ID}} == sche) {
+        {% for m in schedule.MACHINE %}
+          {% if m.chain == True %}
+            console.log("True chain", "{{m.end_flag}}")
+            obj = {
+              "name": "{{m.name}}",
+              "start_time": "{{m.start_time}}",
+              "end_time": "{{m.end_time}}"
+            };
+            chain.push(obj);
+            {% if m.end_flag == True %}
+              console.log(chain);
+              $('#proc').append(double('#FFFFFF','#FFFFFF',chain));
+              chain = [];
+            {% endif %}
+          {% else %}
+            $('#proc').append(single('#FFFFFF', '{{m.name}}', '{{m.start_time}}', '{{m.end_time}}'))
+            console.log("False chain")
+          {% endif %}
+        {% endfor %}
+      }
+      {% endfor %}
+
+      return result
+    }
+
+    $('tr').click(function(){
+      sche = $(this).find('td').eq(0).text()
+      //console.log(sche, generate(sche))
+      $('#proc').empty()
+      $('#proc').append(structure())
+      generate(sche)
+      //$('#proc').append(generate(sche))
+    })
+
+    function form_submit() {
+        document.getElementById("form_d33").submit();
+    }                           
+</script>
 {% endblock content %}

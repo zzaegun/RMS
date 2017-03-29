@@ -2,7 +2,7 @@
 
 {% block content %}
         <div class="medium-10 medium-centered large-12 large-centered columns">
-          <form action="{% url 'main:aPurMan2' %}" id="form_c21" method="post">>
+          <form action="{% url 'main:aPurMan2' %}" id="form_c21" method="post">
           {% csrf_token %}
             <div class="row column log-in-form">
               <h4 class="text-left">주문정보 처리</h4>
@@ -35,7 +35,7 @@
                     -
                     </td>
                     <td style="color: red">
-                    일해라 영업부장!!!!
+                    생산 예정 주문 정보가 존재하지 않습니다.
                     </td>
                     <td>-</td><td>-</td>
                     {% endif %}
@@ -73,16 +73,23 @@
                 {% for sub in subprc %}
                 
                 <i class="arr-right"></i>
-                <div class="subproc c2_sp_margin" class="c2_sp_margin"><div>{{sub}}번 서브</div></div>
+                <div id="{{sub}}" class="subproc c2_sp_margin" class="c2_sp_margin"><div></div></div>
                 
                 {% endfor %}
                 </div>
               </div>
-              <br/>
-              <p class="text-right"><a href="/aPur" class="button">이전</a> <a type="submit" class="button">확인</a></p>
+              <br/><input type="hidden" name="item" value="{{now_val.ORDER_ID}}">
+              <p class="text-right"><a href="javascript:history.back(-1)"  class="button">이전</a> <input type="submit" value="확인" class="button"></p>
             </div>
 
           </form>
+          <script>
 
+        $(document).ready(function(){
+          {% for sprc in sprc_list %}
+            $("#{{sprc.SUBPROC_ID}}>div").html("{{sprc.SUBPROC_NAME}}")
+          {% endfor %}
+        });
+        </script>
         </div>
 {% endblock content %}
